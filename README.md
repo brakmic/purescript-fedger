@@ -15,7 +15,7 @@ So, Fedger.io is really perfect for me....*Machine Learning* **and** *PureScript
 ## Current status
 
 All <a href="https://dev.fedger.io/docs" target="_blank">of the APIs</a> are available as `foreign imports` but currently only three of them are implemented completely.
-The request/response JSONs will also get their strongly typed PureScript counterparts.
+The request/response JSONs will also get their strongly typed counterparts.
 
 <img src="http://fs5.directupload.net/images/160122/6m5fgiv9.png">
 
