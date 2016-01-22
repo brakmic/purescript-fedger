@@ -1,5 +1,7 @@
 module API.Fedger.Messages.Partials where
 
+import Data.List (List)
+
 data Investor = Investor {
   "type"   :: String,
   "name"   :: String,
@@ -8,11 +10,11 @@ data Investor = Investor {
 }
 
 data Round = Round {
-  "date"      :: Number,
-  "amount"    :: Number,
+  "date"      :: Int,
+  "amount"    :: Int,
   "currency"  :: String,
   "round"     :: String,
-  "investors" :: Array Investor
+  "investors" :: List Investor
 }
 
 data Location = Location {
@@ -23,8 +25,8 @@ data Location = Location {
 
 data Peer = Peer {
   "name" :: String,
-  "rank" :: Number,
-  "sim"  :: Number,
+  "rank" :: Int,
+  "sim"  :: Int,
   "url"  :: String
 }
 
@@ -40,5 +42,5 @@ data TeamMember = TeamMember {
   "urlTwitter"   :: String,
   "urlLinkedIn"  :: String,
   "role"         :: String,
-  "lead"         :: Number
+  "lead"         :: Int
 }

@@ -1,62 +1,63 @@
 module API.Fedger.Messages.Responses where
 
 import Prelude                      (bind)
+import Data.List                    (List)
 import API.Fedger.Messages.Partials (..)
 
 data FundingDetailsResponse = FundingDetailsResponse {
   "name"           :: String,
   "domain"         :: String,
-  "amount_total"   :: Number,
+  "amount_total"   :: Int,
   "currency"       :: String,
-  "rounds"         :: Array Round
+  "rounds"         :: List Round
 }
 
 data FundingStatusResponse = FundingStatusResponse {
   "name"         :: String,
   "domain"       :: String,
-  "amount_total" :: Number,
+  "amount_total" :: Int,
   "currency"     :: String,
   "status"       :: String
 }
 
 data FundingsResponse = FundingsResponse {
   "domain"     :: String,
-  "total_fund" :: Number,
+  "total_fund" :: Int,
   "currency"   :: String,
-  "cursor"     :: Number,
-  "fundings"   :: Array String
+  "cursor"     :: Int,
+  "fundings"   :: List String
 }
 
 data CompanyInsightsResponse = CompanyInsightsResponse {
-  "cursor" :: Number,
-  "nodes"  :: Array String
+  "cursor" :: Int,
+  "nodes"  :: List String
 }
 
 data InvestorsResponse = InvestorsResponse {
   "domain"    :: String,
   "name"      :: String,
-  "cursor"    :: Number,
-  "investors" :: Array Investor
+  "cursor"    :: Int,
+  "investors" :: List Investor
 }
 
 data LocationsResponse = LocationsResponse {
    "name"       :: String,
-   "cursor"     :: Number,
-   "nextCursor" :: Number,
+   "cursor"     :: Int,
+   "nextCursor" :: Int,
    "domain"     :: String,
-   "locations"  :: Array Location
+   "locations"  :: List Location
 }
 
 data PeersResponse = PeersResponse {
   "domain" :: String,
-  "peers"  :: Array Peer
+  "peers"  :: List Peer
 }
 
 data PortfolioCompaniesResponse = PortfolioCompaniesResponse {
   "domain"    :: String,
   "name"      :: String,
-  "cursor"    :: Number,
-  "portfolio" :: Array PortfolioEntry
+  "cursor"    :: Int,
+  "portfolio" :: List PortfolioEntry
 }
 
 data CompanySnapshotResponse = CompanySnapshotResponse {
@@ -75,8 +76,8 @@ data CompanySnapshotResponse = CompanySnapshotResponse {
 data TeamDetailsResponse = TeamDetailsResponse {
   "domain" :: String,
   "name"   :: String,
-  "cursor" :: Number,
-  "team"   :: Array TeamMember
+  "cursor" :: Int,
+  "team"   :: List TeamMember
 }
 
 data LogoResponse = LogoResponse {
