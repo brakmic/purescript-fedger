@@ -167,7 +167,7 @@ There's no field `total_fund` but `amount_total` instead. Also, there's no `curr
 
 **Problem 2)**
 
-Its not possible to access `getFundings` from the Company API. The response is always an *HTTP 500-Error*.
+Accessing `getFundings` from the Company API yields an *HTTP 500-Error*.
 
 ```json
 {
