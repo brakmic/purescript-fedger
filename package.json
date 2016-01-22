@@ -20,6 +20,7 @@
   "dependencies": {
     "bluebird": "^3.1.1",
     "cls-bluebird": "^1.0.1",
+    "jquery": "^2.2.0",
     "tls": "0.0.1"
   },
   "devDependencies": {
