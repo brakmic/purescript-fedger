@@ -1,6 +1,6 @@
 ## purescript-fedger
 
-This is a small collection of API bindings for accessing the publicly available <a href="https://fedger.io/" target="_blank">Fedger.io</a> APIs.
+This is a small collection of bindings for accessing the publicly available <a href="https://fedger.io/" target="_blank">Fedger.io</a> APIs.
 Simply register with your E-Mail to obtain a free API-Key.
 
 ## What's the purpose of this library.
