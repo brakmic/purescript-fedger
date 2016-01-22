@@ -3,19 +3,9 @@
 
 var jQuery = $ = require('jquery');
 
-//placeholder for currently not implemented APIs
-_options4 = {
-              'domain': '',
-              'apikey': ''
-            };
-
 //************************************  COMPANY API **************************/
 
 var getFundingDetails = function(options){
-  /*var api = getApiName(options);
-  var opts = convertQueryFor(api, options);
-  var json = queryService(opts);
-  return json;*/
   return callApi(options);
 };
 
@@ -275,8 +265,7 @@ var convertQueryFor = function(api, raw){
     'getLogo'               : {
                                 'url': fedgerBaseUri + '/company/' +
                                                 raw.value0.domain +
-                                                '/logo?apikey=' +
-                                                raw.value0.apikey
+                                                '/logo?apikey=' +    raw.value0.apikey
                               },
     'getPeers'              : {
                                 'url': fedgerBaseUri + '/company/' +
@@ -292,8 +281,7 @@ var convertQueryFor = function(api, raw){
     'getCompanySnapshot'    : {
                                 'url': fedgerBaseUri + '/company/' +
                                                 raw.value0.domain +
-                                                '/snapshot?apikey=' +
-                                                raw.value0.apikey
+                                                '/snapshot?apikey=' + raw.value0.apikey
                               },
     'getTeamDetails'        : {
                                 'url': fedgerBaseUri + '/company/' +

@@ -16,7 +16,6 @@ type FedgerEff a = forall e. Eff (fedgerM :: FedgerM | e) a
 -- | Logging helper
 foreign import logRaw :: forall a e. a -> Eff (console :: CONSOLE | e) Unit
 
-
 -- | Company API
 foreign import getFundingDetails      :: forall e. FundingDetailsQuery     -> (FundingDetailsResponse     -> Eff e Unit) -> FedgerEff Unit
 foreign import getFundingStatus       :: forall e. FundingStatusQuery      -> (FundingStatusResponse      -> Eff e Unit) -> FedgerEff Unit
