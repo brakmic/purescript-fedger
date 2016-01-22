@@ -3,6 +3,12 @@
 
 var jQuery = $ = require('jquery');
 
+//placeholder for currently not implemented APIs
+_options4 = {
+              'domain': '',
+              'apikey': ''
+            };
+
 //************************************  COMPANY API **************************/
 
 var getFundingDetails = function(options){
@@ -130,6 +136,7 @@ var logRaw = function(str) {
   };
 };
 
+//This is a helper for creating internal callbacks to process responses.
 var createCallback = function(api, callback){
   var cb = null;
   if(callback &&
@@ -150,6 +157,7 @@ var createCallback = function(api, callback){
       cb = function(val){
         return function(){
           val.then(function(v){
+            //convert JS-response into PS-response
             var result = convertResponseFor(api, v);
             callback(result)();
           }).catch(function(err){
@@ -161,7 +169,7 @@ var createCallback = function(api, callback){
     }
     return cb;
 };
-
+//All queries ultimately go over this function.
 var queryService = function(options){
   return function(callback){
     var cb = createCallback(options.api, callback);
@@ -182,7 +190,7 @@ var queryService = function(options){
     };
   };
 }
-
+//Helper to construct the proper name of currently used API-call
 var getApiName = function(options){
   var apiName = null;
   if(options){
@@ -194,10 +202,12 @@ var getApiName = function(options){
   return apiName;
 };
 
-/****** CONVERTERS **********************************/
+/*********************** CONVERTERS **********************************/
 
 var fedgerBaseUri = 'https://api.fedger.io/v1';
 
+//Below are tables defined which help to select correct data structures
+//for further processing on the PureScript side.
 
 var convertResponseFor = function(api, raw){
   var mapResponses = {

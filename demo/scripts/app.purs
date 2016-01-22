@@ -10,7 +10,7 @@ import API.Fedger   (FedgerM,
                     LogoResponse(LogoResponse),
                     getCompanySnapshot)
 
-
+-- | -----------------------   Callbacks ------------------------------
 companySnapshotCB :: forall e. CompanySnapshotResponse -> Eff (console :: CONSOLE | e) Unit
 companySnapshotCB = \(CompanySnapshotResponse r) -> do
                                                     log ("Company: "       ++ r.name          ++ "\r\n" ++
@@ -29,6 +29,8 @@ fundingDetailsCB = \(FundingDetailsResponse r) -> do
 logoCB :: forall e. LogoResponse -> Eff(console :: CONSOLE | e) Unit
 logoCB = \(LogoResponse r) -> do
                               log ("logo: " ++ r.binary)
+
+-- | ------------------------ End of Callbacks -----------------------
 
 
 main ::  forall e. Eff (console :: CONSOLE, fedgerM :: FedgerM | e) Unit

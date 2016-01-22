@@ -3,7 +3,7 @@
 This is a small collection of bindings for accessing the publicly available <a href="https://fedger.io/" target="_blank">Fedger.io</a> APIs.
 Simply register with your E-Mail to obtain a free API-Key.
 
-## What's the purpose of this library.
+#### What's the purpose of this library?
 
 Fedger collects and provides information about companies by using machine learning. And because I'd like to learn more about ML *in practice* (<a href="http://blog.brakmic.com/data-science-for-losers-part-4-machine-learning/">and also</a> have <a href="http://blog.brakmic.com/data-science-for-losers-part-6-azure-ml/">written</a> a <a href="http://blog.brakmic.com/data-science-for-losers-part-6-azure-ml/">few articles</a>
 on <a href="http://blog.brakmic.com/data-science-for-losers-part-7-using-azure-ml">this subject</a>) I thought it might be useful to have a *strongly typed* and *side-effect-free* library for ML.
@@ -12,14 +12,14 @@ Of course, it's not a secret that I'm a happy **PureScript-Noob** already <a hre
 
 So, Fedger.io is really perfect for me....*Machine Learning* **and** *PureScript* in one. :smile:
 
-## Current status
+#### Current status
 
 All <a href="https://dev.fedger.io/docs" target="_blank">of the APIs</a> are available as `foreign imports` but currently only three of them are implemented completely.
 The request/response JSONs will also get their strongly typed counterparts.
 
 <img src="http://fs5.directupload.net/images/160122/6m5fgiv9.png">
 
-## Using the API
+#### Using the API
 
 For example, here are the type definitions for `getCompanySnapshot`:
 
@@ -92,7 +92,7 @@ This is the result:
 
 <img src="http://fs5.directupload.net/images/160122/acqut34b.png">
 
-## Building
+#### Building
 
 *Backend*
 
@@ -114,7 +114,7 @@ gulp build-demo
 gulp clean && gulp && gulp build-demo
 ```
 
-## Running
+#### Running
 
 ```shell
 npm start
@@ -122,7 +122,7 @@ npm start
 
 <a href="http://hapijs.com/" target="_blank">HapiJS</a> will start to serve pages on <a href="http://localhost:8080">http://localhost:8080</a>
 
-## Issues / Important notices
+#### Issues / Important notices
 
 During my API tests I found some discrepancies between the docs and the actual response objects. For example, the docs for <a href="https://dev.fedger.io/docs/#!/company/get_company_company_domain_funding_details" target="_blank">getFundingDetails</a> describe the
 response object as
@@ -151,5 +151,5 @@ response object as
 
 There's no field `total_fund` but `amount_total` instead. Also, there's no `currency` property at all!
 
-## License
+#### License
 <a href="https://github.com/brakmic/purescript-fedger/blob/master/LICENSE">MIT</a>
