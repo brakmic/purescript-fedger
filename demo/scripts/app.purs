@@ -36,7 +36,7 @@ logAnyResponse = \anyResponse -> do
 
 main ::  forall e. Eff (console :: CONSOLE, fedgerM :: FedgerM | e) Unit
 main = do
-      let myApiKey = "1289ec547f52487dc88cf967ba0eba42"
+      let myApiKey = "YOUR_API_KEY_HERE"
       let investorsQuery = InvestorsQuery { domain : "arangodb.com", crossDomain : true, apikey : myApiKey, cursor: 0 }
       --let fundingDetailsQuery = FundingDetailsQuery { domain : "arangodb.com", crossDomain : true, apikey : myApiKey }
       --let logoQuery = LogoQuery { domain : "giantswarm.io", crossDomain : true, apikey : myApiKey }
