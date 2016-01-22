@@ -13,14 +13,14 @@ data FundingStatusQuery = FundingStatusQuery {
 data FundingsQuery = FundingsQuery {
   domain :: String,
   apikey :: String,
-  cursor :: Number
+  cursor :: Int
 }
 
 data CompanyInsightsQuery = CompanyInsightsQuery {
   domain  :: String,
   apikey  :: String,
   classes :: String,
-  cursor  :: Number
+  cursor  :: Int
 }
 
 data CompanySnapshotQuery = CompanySnapshotQuery {
@@ -31,13 +31,13 @@ data CompanySnapshotQuery = CompanySnapshotQuery {
 data InvestorsQuery = InvestorsQuery {
   domain :: String,
   apikey :: String,
-  cursor :: Number
+  cursor :: Int
 }
 
 data LocationsQuery = LocationsQuery {
   domain :: String,
   apikey :: String,
-  cursor :: String
+  cursor :: Int
 }
 
 data PeersQuery = PeersQuery {
@@ -48,13 +48,13 @@ data PeersQuery = PeersQuery {
 data PortfolioCompaniesQuery = PortfolioCompaniesQuery {
   domain :: String,
   apikey :: String,
-  cursor :: Number
+  cursor :: Int
 }
 
 data TeamDetailsQuery = TeamDetailsQuery {
   domain :: String,
   apikey :: String,
-  cursor :: Number
+  cursor :: Int
 }
 
 data LogoQuery = LogoQuery {

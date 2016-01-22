@@ -26,15 +26,22 @@ logoCB :: forall e. LogoResponse -> Eff(console :: CONSOLE | e) Unit
 logoCB = \(LogoResponse r) -> do
                               log ("logo: " ++ r.binary)
 
+
+logAnyResponse :: forall a e. a -> Eff (console :: CONSOLE | e) Unit
+logAnyResponse = \anyResponse -> do
+                                 logRaw anyResponse
+
 -- | ------------------------ End of Callbacks -----------------------
 
 
 main ::  forall e. Eff (console :: CONSOLE, fedgerM :: FedgerM | e) Unit
 main = do
       let myApiKey = "YOUR_API_KEY_HERE"
-      let fundingDetailsQuery = FundingDetailsQuery { domain : "arangodb.com", apikey : myApiKey }
+      let investorsQuery = InvestorsQuery { domain : "arangodb.com", apikey : myApiKey, cursor: 0 }
+      --let fundingDetailsQuery = FundingDetailsQuery { domain : "arangodb.com", apikey : myApiKey }
       --let logoQuery = LogoQuery { domain : "giantswarm.io", apikey : myApiKey }
       --let snapshotQuery = CompanySnapshotQuery { domain : "giantswarm.io", apikey : myApiKey }
       --getCompanySnapshot snapshotQuery companySnapshotCB
-      getFundingDetails fundingDetailsQuery fundingDetailsCB
+      --getFundingDetails fundingDetailsQuery fundingDetailsCB
       --getLogo logoQuery logoCB
+      getInvestors investorsQuery logAnyResponse
