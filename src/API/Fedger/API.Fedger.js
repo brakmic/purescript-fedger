@@ -156,7 +156,7 @@ var queryService = function(options){
                     url: options.url,
                     async: options.async,
                     dataType: options.dataType,
-                    crossDomain: true,
+                    crossDomain: options.crossDomain,
                     })
                     .done(function( msg ) {
                       return msg;
@@ -269,7 +269,8 @@ var convertQueryFor = function(api, raw){
     'domain' : raw.value0.domain,
     'apikey' : raw.value0.apikey,
     'method' : 'GET',
-    'api' : api
+    'api' : api,
+    'crossDomain': raw.value0.crossDomain ? raw.value0.crossDomain : true
   }, q, query
 
   mapQueries = {
