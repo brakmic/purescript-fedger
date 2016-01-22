@@ -239,37 +239,37 @@ var convertQueryFor = function(api, raw){
 
                                 'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      'funding/details?apikey=' + raw.value0.apikey
+                                      '/funding/details?apikey=' + raw.value0.apikey
 
                               },
     'getFundingStatus'      : {
                                 'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      'funding/status?apikey=' + raw.value0.apikey
+                                      '/funding/status?apikey=' + raw.value0.apikey
                               },
     'getFundings'           : {
                                 'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      'fundings?apikey=' + raw.value0.apikey,
+                                      '/fundings?apikey=' + raw.value0.apikey,
                                 'cursor' : raw.value0.cursor
                               },
     'getCompanyInsights'    : {
                                 'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      'insights/?apikey=' + raw.value0.apikey,
+                                      '/insights/?apikey=' + raw.value0.apikey,
                                 'classes' : raw.value0.classes,
                                 'cursor'  : raw.value0.cursor
                               },
     'getInvestors'          : {
                                 'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      'investors?apikey=' + raw.value0.apikey,
+                                      '/investors?apikey=' + raw.value0.apikey,
                                 'cursor' : raw.value0.cursor
                               },
     'getLocations'          : {
                                 'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      'locations/details?apikey=' + raw.value0.apikey,
+                                      '/locations/details?apikey=' + raw.value0.apikey,
                                 'cursor' : raw.value0.cursor
                               },
     'getLogo'               : {
@@ -281,12 +281,12 @@ var convertQueryFor = function(api, raw){
     'getPeers'              : {
                                 'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      'peers?apikey=' + raw.value0.apikey,
+                                      '/peers?apikey=' + raw.value0.apikey,
                               },
     'getPortfolioCompanies' : {
                                 'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      'portfolio?apikey=' + raw.value0.apikey,
+                                      '/portfolio?apikey=' + raw.value0.apikey,
                                 'cursor' : raw.value0.cursor
                               },
     'getCompanySnapshot'    : {
@@ -298,7 +298,7 @@ var convertQueryFor = function(api, raw){
     'getTeamDetails'        : {
                                 'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      'team/details?apikey=' + raw.value0.apikey,
+                                      '/team/details?apikey=' + raw.value0.apikey,
                                 'cursor' : raw.value0.cursor
                               }
   };
