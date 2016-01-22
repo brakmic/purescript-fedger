@@ -188,15 +188,51 @@ var fedgerBaseUri = 'https://api.fedger.io/v1';
 
 var convertResponseFor = function(api, raw){
   var mapResponses = {
-      'getFundingDetails' : {
-                              'domain'       : raw.domain,
-                              'amount_total' : raw.amount_total,
-                              'currency'     : raw.currency,
-                              'rounds'       : raw.rounds
-                            },
-      'getLogo'           : {
-                              'data' : raw
-                            },
+      'getFundingDetails'      : {
+                                   'domain'       : raw.domain,
+                                   'amount_total' : raw.amount_total,
+                                   'currency'     : raw.currency,
+                                   'rounds'       : raw.rounds
+                                 },
+      'getLogo'                : {
+                                   'data' : raw
+                                 },
+      'getFundingStatus'       : {
+                                   "domain"       : raw.domain,
+                                   "fundingTotal" : raw.amount_total,
+                                   "currency"     : raw.currency,
+                                   "status"       : raw.status
+                                 },
+      'getFundings'            : {
+                                   'domain'     : raw.domain,
+                                   'total_fund' : raw.total_fund,
+                                   'currency'   : raw.currency,
+                                   'cursor'     : raw.cursor,
+                                   'fundings'   : raw.fundings
+                                 },
+      'getCompanyInsights'     : {
+                                   'cursor' : raw.cursor,
+                                   'nodes'  : raw.nodes
+                                 },
+      'getInvestors'           : {
+                                   'domain'    : raw.domain,
+                                   'cursor'    : raw.cursor,
+                                   'investors' : raw.investors
+                                 },
+      'getLocations'           : {
+                                   'domain'    : raw.domain,
+                                   'cursor'    : raw.cursor,
+                                   'locations' : raw.locations
+                                 },
+      'getPeers'               : {
+                                   'domain' : raw.domain,
+                                   'peers'  : raw.peers
+                                },
+      'getPortfolioCompanies' : {
+                                  'domain'    : raw.domain,
+                                  'cursor'    : raw.cursor,
+                                  'portfolio' : raw.portfolio
+                                },
       'getCompanySnapshot' : {
                                 'dateFounded'   : raw.dateFounded,
                                 'fundingLevel'  : raw.fundingLevel,
@@ -208,7 +244,19 @@ var convertResponseFor = function(api, raw){
                                 'name'          : raw.name,
                                 'domain'        : raw.domain,
                                 'phone'         : raw.phone
-                             }
+                             },
+      'getTeamDetails'      : {
+                                 'domain'        : raw.domain,
+                                 'name'          : raw.name,
+                                 'slug'          : raw.slug,
+                                 'phone'         : raw.phone,
+                                 'dateFounded'   : raw.dateFounded,
+                                 'fundingLevel'  : raw.fundingLevel,
+                                 'urlTwitter'    : raw.urlTwitter,
+                                 'urlLinkedIn'   : raw.urlLinkedIn,
+                                 'urlAngellist'  : raw.Angellist,
+                                 'urlCrunchbase' : raw.urlCrunchbase
+                              }
   },
   result = { 'value0': mapResponses[api] };
 
