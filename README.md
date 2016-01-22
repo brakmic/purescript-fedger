@@ -5,7 +5,7 @@ Simply register with your E-Mail to obtain a free API-Key.
 
 ## What's the purpose of this library.
 
-Fedger is a company that collects and provides information about companies by using machine learning. And because I'd like to learn more about ML *in practice* (<a href="http://blog.brakmic.com/data-science-for-losers-part-4-machine-learning/">and also</a> have <a href="http://blog.brakmic.com/data-science-for-losers-part-6-azure-ml/">written</a> a <a href="http://blog.brakmic.com/data-science-for-losers-part-6-azure-ml/">few articles</a>
+Fedger collects and provides information about companies by using machine learning. And because I'd like to learn more about ML *in practice* (<a href="http://blog.brakmic.com/data-science-for-losers-part-4-machine-learning/">and also</a> have <a href="http://blog.brakmic.com/data-science-for-losers-part-6-azure-ml/">written</a> a <a href="http://blog.brakmic.com/data-science-for-losers-part-6-azure-ml/">few articles</a>
 on <a href="http://blog.brakmic.com/data-science-for-losers-part-7-using-azure-ml">this subject</a>) I thought it might be useful to have a *strongly typed* and *side-effect-free* library for ML.
 
 Of course, it's not a secret that I'm a happy **PureScript-Noob** already <a href="https://github.com/brakmic/purescript-ractive">maintaining</a> two *pet projects* based on PureScript but <a href="https://github.com/brakmic/purescript-redux">they</a> have nothing in common with ML.
