@@ -12,119 +12,97 @@ _options4 = {
 //************************************  COMPANY API **************************/
 
 var getFundingDetails = function(options){
-  var api = getApiName(options);
+  /*var api = getApiName(options);
   var opts = convertQueryFor(api, options);
   var json = queryService(opts);
-  return json;
+  return json;*/
+  return callApi(options);
 };
 
 var getFundingStatus = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getFundings = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getCompanyInsights = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getInvestors = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getLocations = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getLogo = function(options){
-  var api = getApiName(options);
-  var opts = convertQueryFor(api, options);
-  var json = queryService(opts);
-  return json;
+  return callApi(options);
 };
 
 var getPeers = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getPortfolioCompanies = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getCompanySnapshot = function(options){
-  var api = getApiName(options);
-  var opts = convertQueryFor(api, options);
-  var json = queryService(opts);
-  return json;
+  return callApi(options);
 };
 
 var getTeamDetails = function(option){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 /********************* DISCOVER API ***********************************/
 
 var getDiscovery = function(options) {
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getDiscoveryCompanies = function(options) {
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getDiscoveryVertices = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 /********************* GEO API ***************************************/
 
 var getGeoLocatedCompanies = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getGeoLocatedFundings = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 /********************* NEWS API **************************************/
 
 var getLatestFundings = function (options) {
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 }
 
 /********************* STATS API *************************************/
 
 var getStatsFundings = function(options) {
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 /********************** TAGGED API ***********************************/
 
 var getTaggedCompanies = function(options) {
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 var getTaggedFundings = function(options){
-  options = _options4;
-  return queryService(options);
+  return callApi(options);
 };
 
 /**************** HELPERS ***************************/
@@ -169,7 +147,16 @@ var createCallback = function(api, callback){
     }
     return cb;
 };
-//All queries ultimately go over this function.
+
+//All API-calls go through this function
+var callApi = function(options){
+  var api = getApiName(options);
+  var opts = convertQueryFor(api, options);
+  var json = queryService(opts);
+  return json;
+}
+
+//All Service-Queries go through this function.
 var queryService = function(options){
   return function(callback){
     var cb = createCallback(options.api, callback);
@@ -248,26 +235,72 @@ var convertQueryFor = function(api, raw){
   }, q, query
 
   mapQueries = {
-    'getFundingDetails' : {
+    'getFundingDetails'     : {
 
-                            'url': fedgerBaseUri + '/company/' +
+                                'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      'giantswarm.io/funding/details?apikey=' +
-                                      raw.value0.apikey
+                                      'funding/details?apikey=' + raw.value0.apikey
 
-                          },
-    'getLogo'           : {
-                            'url': fedgerBaseUri + '/company/' +
+                              },
+    'getFundingStatus'      : {
+                                'url': fedgerBaseUri + '/company/' +
+                                                 raw.value0.domain +
+                                      'funding/status?apikey=' + raw.value0.apikey
+                              },
+    'getFundings'           : {
+                                'url': fedgerBaseUri + '/company/' +
+                                                 raw.value0.domain +
+                                      'fundings?apikey=' + raw.value0.apikey,
+                                'cursor' : raw.value0.cursor
+                              },
+    'getCompanyInsights'    : {
+                                'url': fedgerBaseUri + '/company/' +
+                                                 raw.value0.domain +
+                                      'insights/?apikey=' + raw.value0.apikey,
+                                'classes' : raw.value0.classes,
+                                'cursor'  : raw.value0.cursor
+                              },
+    'getInvestors'          : {
+                                'url': fedgerBaseUri + '/company/' +
+                                                 raw.value0.domain +
+                                      'investors?apikey=' + raw.value0.apikey,
+                                'cursor' : raw.value0.cursor
+                              },
+    'getLocations'          : {
+                                'url': fedgerBaseUri + '/company/' +
+                                                 raw.value0.domain +
+                                      'locations/details?apikey=' + raw.value0.apikey,
+                                'cursor' : raw.value0.cursor
+                              },
+    'getLogo'               : {
+                                'url': fedgerBaseUri + '/company/' +
                                                 raw.value0.domain +
                                                 '/logo?apikey=' +
                                                 raw.value0.apikey
-                          },
-    'getCompanySnapshot' : {
-                             'url': fedgerBaseUri + '/company/' +
+                              },
+    'getPeers'              : {
+                                'url': fedgerBaseUri + '/company/' +
+                                                 raw.value0.domain +
+                                      'peers?apikey=' + raw.value0.apikey,
+                              },
+    'getPortfolioCompanies' : {
+                                'url': fedgerBaseUri + '/company/' +
+                                                 raw.value0.domain +
+                                      'portfolio?apikey=' + raw.value0.apikey,
+                                'cursor' : raw.value0.cursor
+                              },
+    'getCompanySnapshot'    : {
+                                'url': fedgerBaseUri + '/company/' +
                                                 raw.value0.domain +
                                                 '/snapshot?apikey=' +
                                                 raw.value0.apikey
-                           }
+                              },
+    'getTeamDetails'        : {
+                                'url': fedgerBaseUri + '/company/' +
+                                                 raw.value0.domain +
+                                      'team/details?apikey=' + raw.value0.apikey,
+                                'cursor' : raw.value0.cursor
+                              }
   };
 
   q = mapQueries[api];
