@@ -35,7 +35,7 @@ main ::  forall e. Eff (console :: CONSOLE, fedgerM :: FedgerM | e) Unit
 main = do
       --let fundingDetailsQuery = FundingDetailsQuery { domain : "giantswarm.io", apikey : "YOUR_API_KEY_HERE" }
       --let logoQuery = LogoQuery { domain : "giantswarm.io", apikey : "YOUR_API_KEY_HERE" }
-      let snapshotQuery = CompanySnapshotQuery { domain : "giantswarm.io", apikey : "1289ec547f52487dc88cf967ba0eba42" }
+      let snapshotQuery = CompanySnapshotQuery { domain : "giantswarm.io", apikey : "YOUR_API_KEY_HERE" }
       getCompanySnapshot snapshotQuery companySnapshotCB
       --getFundingDetails fundingDetailsQuery fundingDetailsCB
       --getLogo logoQuery logoCB
