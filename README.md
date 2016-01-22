@@ -136,6 +136,8 @@ npm start
 
 #### Issues / Important notices
 
+**Problem 1)**
+
 During my API tests I found some discrepancies between the docs and the actual response objects. For example, the docs for <a href="https://dev.fedger.io/docs/#!/company/get_company_company_domain_funding_details" target="_blank">getFundingDetails</a> describe the
 response object as
 
@@ -162,6 +164,18 @@ response object as
 ```
 
 There's no field `total_fund` but `amount_total` instead. Also, there's no `currency` property at all!
+
+**Problem 2)**
+
+Its not possible to access `getFundings` from the Company API. The response is always an *HTTP 500-Error*.
+
+```json
+{
+  "statusCode": 500,
+  "error": "Internal Server Error",
+  "message": "An internal server error occurred"
+}
+```
 
 #### License
 <a href="https://github.com/brakmic/purescript-fedger/blob/master/LICENSE">MIT</a>

@@ -1,6 +1,6 @@
 module DemoApp.Fedger where
 
-import Prelude                       (Unit, bind, (++), unit, pure)
+import Prelude                       (Unit, bind, (++))
 import Control.Monad.Eff             (Eff)
 import Control.Monad.Eff.Console     (CONSOLE(), log)
 import API.Fedger                    (..)
@@ -20,8 +20,7 @@ companySnapshotCB = \(CompanySnapshotResponse r) -> do
 
 fundingDetailsCB :: forall e. FundingDetailsResponse -> Eff (console :: CONSOLE | e) Unit
 fundingDetailsCB = \(FundingDetailsResponse r) -> do
-                                                  log ("DOMAIN: " ++ r.domain ++ "")
-                                                  pure unit
+                                                  logRaw r
 
 logoCB :: forall e. LogoResponse -> Eff(console :: CONSOLE | e) Unit
 logoCB = \(LogoResponse r) -> do
@@ -32,9 +31,10 @@ logoCB = \(LogoResponse r) -> do
 
 main ::  forall e. Eff (console :: CONSOLE, fedgerM :: FedgerM | e) Unit
 main = do
-      let fundingDetailsQuery = FundingDetailsQuery { domain : "giantswarm.io", apikey : "YOUR_API_KEY_HERE" }
-      --let logoQuery = LogoQuery { domain : "giantswarm.io", apikey : "YOUR_API_KEY_HERE" }
-      --let snapshotQuery = CompanySnapshotQuery { domain : "giantswarm.io", apikey : "YOUR_API_KEY_HERE" }
+      let myApiKey = "YOUR_API_KEY_HERE"
+      let fundingDetailsQuery = FundingDetailsQuery { domain : "arangodb.com", apikey : myApiKey }
+      --let logoQuery = LogoQuery { domain : "giantswarm.io", apikey : myApiKey }
+      --let snapshotQuery = CompanySnapshotQuery { domain : "giantswarm.io", apikey : myApiKey }
       --getCompanySnapshot snapshotQuery companySnapshotCB
       getFundingDetails fundingDetailsQuery fundingDetailsCB
       --getLogo logoQuery logoCB

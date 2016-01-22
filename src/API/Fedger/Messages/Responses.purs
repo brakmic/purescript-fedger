@@ -1,5 +1,6 @@
 module API.Fedger.Messages.Responses where
 
+import Prelude                      (bind)
 import API.Fedger.Messages.Partials (..)
 
 data FundingDetailsResponse = FundingDetailsResponse {
