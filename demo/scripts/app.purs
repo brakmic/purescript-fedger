@@ -97,7 +97,7 @@ logInvestors = \(InvestorsResponse r) -> do
 
 main ::  forall e. Eff (console :: CONSOLE, fedgerM :: FedgerM | e) Unit
 main = do
-      let myApiKey = "1289ec547f52487dc88cf967ba0eba42"
+      let myApiKey = "YOUR_API_KEY_HERE"
       -- | ********************************** QUERY CONFIGS ***********************************************
       -- let discoveryQuery = DiscoveryQuery { s : "oracle", crossDomain : true, apikey : myApiKey }
       -- let discoveryCompaniesQuery = DiscoveryCompaniesQuery { s : "oracle", crossDomain : true, apikey : myApiKey, cursor : 0 }
