@@ -18,7 +18,7 @@ So, Fedger.io is really perfect for me....*Machine Learning* **and** *PureScript
 
 All of <a href="https://dev.fedger.io/docs" target="_blank">the APIs</a> are available as `foreign imports`.
 
-<img src="http://fs5.directupload.net/images/160124/wjxpqiab.png">
+<img src="http://fs5.directupload.net/images/160124/l4lkzk6q.png">
 
 The Fedger API comprises of following sub-APIs:
 
