@@ -63,15 +63,11 @@ data Vertice = Vertice {
   "city"         :: String
 }
 
--- newtype Vertices = List Vertice
-
 data Edge = Edge {
   "_from" :: String,
   "_to"   :: String,
   "label" :: String
 }
-
--- newtype Edges = List Edge
 
 type DiscoveryData = {
   "vertices" :: List Vertice,
@@ -79,34 +75,91 @@ type DiscoveryData = {
 }
 
 data DiscoveryCompaniesEntry = DiscoveryCompaniesEntry {
-      "_id"                 :: String,
-      "_rev"                :: String,
-      "_key"                :: String,
-      "investorCount"       :: Int,
-      "wentIPO"             :: Boolean,
-      "wasAcquired"         :: Boolean,
-      "dateFounded"         :: Int,
-      "inCount"             :: Int,
-      "outCount"            :: Int,
-      "companySize"         :: String,
-      "ec"                  :: Int,
-      "fundingLevel"        :: Int,
-      "invRatio"            :: Int,
-      "fundingTotal"        :: Int,
-      "mc"                  :: Int,
-      "urlAngellist"        :: String,
-      "slug"                :: String,
-      "name"                :: String,
-      "urlSlug"             :: String,
-      "origin"              :: String,
-      "fundingCurrencyCode" :: String,
-      "phone"               :: String,
-      "urlTwitter"          :: String,
-      "urlCrunchbase"       :: String,
-      "urlWebsite"          :: String,
-      "descShort"           :: String,
-      "descFull"            :: String,
-      "type"                :: String
+  "_id"                 :: String,
+  "_rev"                :: String,
+  "_key"                :: String,
+  "investorCount"       :: Int,
+  "wentIPO"             :: Boolean,
+  "wasAcquired"         :: Boolean,
+  "dateFounded"         :: Int,
+  "inCount"             :: Int,
+  "outCount"            :: Int,
+  "companySize"         :: String,
+  "ec"                  :: Int,
+  "fundingLevel"        :: Int,
+  "invRatio"            :: Int,
+  "fundingTotal"        :: Int,
+  "mc"                  :: Int,
+  "urlAngellist"        :: String,
+  "slug"                :: String,
+  "name"                :: String,
+  "urlSlug"             :: String,
+  "origin"              :: String,
+  "fundingCurrencyCode" :: String,
+  "phone"               :: String,
+  "urlTwitter"          :: String,
+  "urlCrunchbase"       :: String,
+  "urlWebsite"          :: String,
+  "descShort"           :: String,
+  "descFull"            :: String,
+  "type"                :: String
 }
 
--- newtype DiscoveryCompaniesEntryList = List DiscoveryCompaniesEntry
+-- | ********************* GEO API ***************************
+
+data GeoLocatedCompany = GeoLocatedCompany {
+  "dateFounded"   :: Int,
+  "fundingLevel"  :: Int,
+  "phone"         :: String,
+  "slug"          :: String,
+  "urlCrunchbase" :: String,
+  "urlAngellist"  :: String,
+  "urlWebsite"    :: String,
+  "urlTwitter"    :: String,
+  "name"          :: String
+}
+
+data GeoLocatedFunding = GeoLocatedFunding {
+  "company"  :: String,
+  "investor" :: String,
+  "amount"   :: Int,
+  "currency" :: String,
+  "date"     :: Int,
+  "round"    :: String
+}
+
+-- | ********************* NEWS API ****************************
+
+data LatestFunding = LatestFunding {
+  "date"      :: Int,
+  "amount"    :: Int,
+  "currency"  :: String,
+  "round"     :: String,
+  "name"      :: String,
+  "slug"      :: String,
+  "domain"    :: String,
+  "investors" :: List Investor --<<-- same Investor-Type as in Company API
+}
+
+-- | ********************* TAGGED API *************************
+
+data TaggedCompany = TaggedCompany {
+  "dateFounded"   :: Number,
+  "fundingLevel"  :: Int,
+  "slug"          :: String,
+  "name"          :: String,
+  "phone"         :: String,
+  "urlTwitter"    :: String,
+  "urlCrunchbase" :: String,
+  "urlWebsite"    :: String,
+  "urlAngellist"  :: String
+}
+
+data TaggedFunding = TaggedFunding {
+  "company"  :: String,
+  "investor" :: String,
+  "amount"   :: Number,
+  "currency" :: Number,
+  "date"     :: Number,
+  "round"    :: String
+}

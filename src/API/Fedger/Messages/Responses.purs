@@ -103,3 +103,48 @@ data DiscoveryVerticesResponse = DiscoveryVerticesResponse {
   "total_count" :: Int,
   "data"        :: List Vertice
 }
+
+-- | ************************** GEO API ***************************
+
+data GeoLocatedCompaniesResponse = GeoLocatedCompaniesResponse {
+  "cursor"    :: Int,
+  "companies" :: List GeoLocatedCompany
+}
+
+data GeoLocatedFundingsResponse = GeoLocatedFundingsResponse {
+  "cursor"   :: Int,
+  "fundings" :: List GeoLocatedFunding
+}
+
+-- | ************************** NEWS API **************************
+
+data LatestFundingsResponse = LatestFundingsResponse {
+  "date_reference"  :: Number,
+  "fundings"        :: List LatestFunding
+}
+
+-- | ************************** STATS API *************************
+
+data StatsFundingsResponse = StatsFundingsResponse {
+  "type"     :: String,
+  "year"     :: Int,
+  "currency" :: String,
+  "count"    :: Int,
+  "total"    :: Number,
+  "min"      :: Number,
+  "max"      :: Number,
+  "mean"     :: Number,
+  "stddev"   :: Number
+}
+
+-- | ************************* TAGGED API *************************
+
+data TaggedCompaniesResponse = TaggedCompaniesResponse {
+  "cursor" :: Int,
+  "companies" :: List TaggedCompany
+}
+
+data TaggedFundingsResponse = TaggedFundingsResponse {
+  "cursor"   :: Int,
+  "fundings" :: List TaggedFunding
+}

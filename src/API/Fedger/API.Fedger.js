@@ -189,6 +189,7 @@ var getApiName = function(options){
 
 /*********************** CONVERTERS + BOILERPLATE***************************/
 
+//Create a PureScript collection
 var toPSList = function(jsList){
   var list = [];
   if(jsList){
@@ -201,6 +202,19 @@ var toPSList = function(jsList){
     list = Data_List.Cons.create(Data_List.Nil.value)(Data_List.Nil.value);
   }
   return list;
+};
+
+var extractMaybe = function(may){
+  if(!may)return null;
+  var result = null;
+  if(may.constructor &&
+     may.constructor.name == 'Just'){
+    result = may.value0;
+  } else if(may.constructor &&
+     may.constructor.name == 'Nothing'){
+     result = null;
+  }
+  return result;
 };
 
 var createRound = function(rnd){
@@ -230,15 +244,6 @@ var createInvestors = function(invs){
     invstrss.push(createInvestor(invs[i]));
   }
   return invstrss;
-};
-
-var createFundings = function(funds){
-  if(!funds)return;
-  var fndss = [];
-  for (var i = funds.length - 1; i >= 0; i--) {
-    fndss.push(funds[i]);
-  }
-  return fndss;
 };
 
 var createLocation = function(loc){
@@ -326,108 +331,102 @@ var createDiscoveryCompanies = function(discs){
   return discss;
 };
 
+var createGeoLocatedCompany = function(gco){
+  var geoco = _Partials.GeoLocatedCompany.create(gco);
+  return geoco;
+};
+
+var createGeoLocatedCompanies = function(gcos){
+  if(!gcos)return;
+  var gcoss = [];
+   for (var i = gcos.length - 1; i >= 0; i--) {
+    gcoss.push(createGeoLocatedCompany(gcos[i]));
+  }
+  return gcoss;
+};
+
+var createGeoLocatedFunding = function(fnd){
+  var fund = _Partials.GeoLocatedFunding.create(fnd);
+  return fund;
+};
+
+var createGeoLocatedFundings = function(funds){
+  if(!funds)return;
+  var fndss = [];
+  for (var i = funds.length - 1; i >= 0; i--) {
+    fndss.push(createGeoLocatedFunding(funds[i]));
+  }
+  return fndss;
+};
+
+var createLatestFunding = function(fnd){
+  var fund = _Partials.LatestFunding.create(fnd);
+  //additionally, we create a nested PS-Type: List Investor
+  fund.investors = toPSList(createInvestors(fnd.investors));
+  return fund;
+};
+
+var createLatestFundings = function(funds){
+  if(!funds)return;
+  var fndss = [];
+  for (var i = funds.length - 1; i >= 0; i--) {
+    fndss.push(createLatestFunding(funds[i]));
+  }
+  return fndss;
+}
+
 //Below are tables defined which help to select correct data structures
 //for further processing on the PureScript side.
 
 var convertResponseFor = function(api, raw){
   var mapResponses = {
       //************** COMPANY API ************************
-      'getFundingDetails'      : {
-                                   'domain'       : raw.domain,
-                                   'amount_total' : raw.amount_total,
-                                   'currency'     : raw.currency,
-                                   'rounds'       : toPSList(createRounds(raw.rounds))
-                                 },
-      'getLogo'                : {
-                                   'data' : raw
-                                 },
-      'getFundingStatus'       : {
-                                   "domain"       : raw.domain,
-                                   "fundingTotal" : raw.amount_total,
-                                   "currency"     : raw.currency,
-                                   "status"       : raw.status
-                                 },
-      'getFundings'            : {
-                                   'domain'     : raw.domain,
-                                   'total_fund' : raw.total_fund,
-                                   'currency'   : raw.currency,
-                                   'cursor'     : raw.cursor,
-                                   'fundings'   : toPSList(raw.fundings) //this list isn't based on Fundings-Type,
-                                                                        //it's just a list of strings
-                                 },
-      'getCompanyInsights'     : {
-                                   'cursor' : raw.cursor,
-                                   'nodes'  : toPSList(raw.nodes) //just a string list
-                                 },
-      'getInvestors'           : {
-                                   'domain'    : raw.domain,
-                                   'cursor'    : raw.cursor,
-                                   'investors' : toPSList(createInvestors(raw.investors))
-                                 },
-      'getLocations'           : {
-                                   'domain'    : raw.domain,
-                                   'cursor'    : raw.cursor,
-                                   'locations' : toPSList(createLocations(raw.locations))
-                                 },
-      'getPeers'               : {
-                                   'domain' : raw.domain,
-                                   'peers'  : toPSList(createPeers(raw.peers))
-                                },
-      'getPortfolioCompanies' : {
-                                  'domain'    : raw.domain,
-                                  'cursor'    : raw.cursor,
-                                  'portfolio' : toPSList(createPortfolio(raw.portfolio))
-                                },
-      'getCompanySnapshot' : {
-                                'dateFounded'   : raw.dateFounded,
-                                'fundingLevel'  : raw.fundingLevel,
-                                'urlAngellist'  : raw.urlAngellist,
-                                'urlTwitter'    : raw.urlTwitter,
-                                'urlCrunchbase' : raw.urlCrunchbase,
-                                'urlLinkedIn'   : raw.urlLinkedIn,
-                                'slug'          : raw.slug,
-                                'name'          : raw.name,
-                                'domain'        : raw.domain,
-                                'phone'         : raw.phone
-                             },
-      'getTeamDetails'      : {
-                                 'domain'        : raw.domain,
-                                 'name'          : raw.name,
-                                 'slug'          : raw.slug,
-                                 'phone'         : raw.phone,
-                                 'dateFounded'   : raw.dateFounded,
-                                 'fundingLevel'  : raw.fundingLevel,
-                                 'urlTwitter'    : raw.urlTwitter,
-                                 'urlLinkedIn'   : raw.urlLinkedIn,
-                                 'urlAngellist'  : raw.Angellist,
-                                 'urlCrunchbase' : raw.urlCrunchbase
-                              },
+      'getFundingDetails'      : _Responses.FundingDetailsResponse.create(raw)
+                                 ,
+      'getLogo'                : _Responses.LogoResponse.create(raw)
+                                 ,
+      'getFundingStatus'       : _Responses.FundingStatusResponse.create(raw)
+                                 ,
+      'getFundings'            : _Responses.FundingsResponse.create(raw)
+                                 ,
+      'getCompanyInsights'     : _Responses.CompanyInsightsResponse.create(raw)
+                                 ,
+      'getInvestors'           : _Responses.InvestorsResponse.create(raw)
+                                 ,
+      'getLocations'           : _Responses.LocationsResponse.create(raw)
+                                 ,
+      'getPeers'               : _Responses.PeersResponse.create(raw)
+                                 ,
+      'getPortfolioCompanies'  : _Responses.PortfolioCompaniesResponse.create(raw)
+                                 ,
+      'getCompanySnapshot'     : _Responses.CompanySnapshotResponse.create(raw)
+                                 ,
+      'getTeamDetails'         : _Responses.TeamDetailsResponse.create(raw)
+                                 ,
       //******************** DISCOVER API ***********************
-      'getDiscovery'        : {
-                                'data' : raw.data ?
-                                {
-                                  'vertices' : raw.data.vertices ? toPSList(createVertices(raw.data.vertices)) : toPSList([]),
-                                  'edges'    : raw.data.edges    ? toPSList(createEdges(raw.data.edges)) : toPSList([])
-
-                                } //if NULL construct an empty structure
-                                : { 'vertices' : toPSList([]), edges : toPSList([]) }
-                              },
-      'getDiscoveryCompanies' : {
-                                  "cursor"      : raw.cursor,
-                                  "total_count" : raw.total_count,
-                                  "data"        : raw.data ? toPSList(createDiscoveryCompanies(raw.data))
-                                   //if NULL construct an empty array
-                                  : toPSList([])
-                                },
-      'getDiscoveryVertices'  : {
-                                  "cursor"      : raw.cursor,
-                                  "total_count" : raw.total_count,
-                                  "data"        : raw.data ? toPSList(createVertices(raw.data))
-                                  //if NULL constructr an empty array
-                                  : toPSList([])
-                                }
+      'getDiscovery'           : _Responses.DiscoveryResponse.create(raw)
+                                 ,
+      'getDiscoveryCompanies'  : _Responses.DiscoveryCompaniesResponse.create(raw)
+                                 ,
+      'getDiscoveryVertices'   : _Responses.DiscoveryVerticesResponse.create(raw)
+                                 ,
+      //************************* GEO API *************************
+      'getGeoLocatedCompanies' : _Responses.GeoLocatedCompaniesResponse.create(raw)
+                                 ,
+      'getGeoLocatedFundings'  : _Responses.GeoLocatedFundingsResponse.create(raw)
+                                 ,
+      //************************* NEWS API ************************
+      'getLatestFundings'      : _Responses.LatestFundingsResponse.create(raw)
+                                 ,
+      //************************* STATS API ***********************
+      'getStatsFundings'       : _Responses.StatsFundingsResponse.create(raw)
+                                 ,
+      //************************* TAGGED API **********************
+      'getTaggedCompanies'     : _Responses.TaggedCompaniesResponse.create(raw)
+                                 ,
+      'getTaggedFundings'      : _Responses.TaggedFundingsResponse.create(raw)
   },
-  result = { 'value0': mapResponses[api] };
+  result = mapResponses[api];
 
   return result;
 };
@@ -489,7 +488,7 @@ var convertQueryFor = function(api, raw){
     'getPeers'              : {
                                 'url': fedgerBaseUri + '/company/' +
                                                  raw.value0.domain +
-                                      '/peers?apikey=' + raw.value0.apikey,
+                                      '/peers?apikey=' + raw.value0.apikey
                               },
     'getPortfolioCompanies' : {
                                 'url': fedgerBaseUri + '/company/' +
@@ -511,16 +510,54 @@ var convertQueryFor = function(api, raw){
     //************************* DISCOVER API ****************************
     'getDiscovery'          : {
                                 'url': fedgerBaseUri + '/discover?s=' + raw.value0.s +
-                                      '&apikey=' + raw.value0.apikey,
+                                      '&apikey=' + raw.value0.apikey
                               },
     'getDiscoveryCompanies' : {
                                 'url': fedgerBaseUri + '/discover/companies?s=' + raw.value0.s +
-                                      '&apikey=' + raw.value0.apikey,
+                                      '&apikey=' + raw.value0.apikey
                               },
     'getDiscoveryVertices'  : {
                                 'url': fedgerBaseUri + '/discover/vertices?s=' + raw.value0.s +
-                                      '&apikey=' + raw.value0.apikey,
-                              }
+                                      '&apikey=' + raw.value0.apikey
+                              },
+    //************************** GEO API ********************************
+    'getGeoLocatedCompanies' : {
+                                  'url': fedgerBaseUri + '/geo/' + raw.value0.country_code +
+                                      '/company?apikey=' + raw.value0.apikey
+                               },
+    'getGeoLocatedFundings'  : {
+                                  'url': fedgerBaseUri + '/geo/' + raw.value0.country_code +
+                                      '/funding?apikey=' + raw.value0.apikey
+                               },
+    //************************** NEWS API ******************************
+    'getLatestFundings'      : {
+                                  'url': fedgerBaseUri + '/news/fundings?apikey=' + raw.value0.apikey
+                               },
+    //************************** STATS API *****************************
+    'getStatsFundings'         : {
+                                   'url': fedgerBaseUri + '/stats/fundings/' + raw.value0.year +
+                                      (extractMaybe(raw.value0.month) ? '?month=' + extractMaybe(raw.value0.month) : '') +
+                                      (extractMaybe(raw.value0.country) ? '&country=' +extractMaybe(raw.value0.country) : '') +
+                                      (extractMaybe(raw.value0.tag) ? '&tag=' + extractMaybe(raw.value0.tag) : '') +
+                                      ((extractMaybe(raw.value0.month) ||
+                                        extractMaybe(raw.value0.country) ||
+                                        extractMaybe(raw.value0.tag)) ? '&apikey=' + raw.value0.apikey : '?apikey=' + raw.value0.apikey)
+                                 },
+    //************************** TAGGED API *****************************
+    'getTaggedCompanies'       : {
+                                    'url': fedgerBaseUri + '/tagged/company?tags=' + raw.value0.tags +
+                                      (extractMaybe(raw.value0.isJoin) ? '&isJoin=' + extractMaybe(raw.value0.isJoin) : '') +
+                                      (extractMaybe(raw.value0.cursor) ? '&cursor=' + extractMaybe(raw.value0.cursor) : '') +
+                                      '&apikey=' + raw.value0.apikey
+                                 },
+    'getTaggedFundings'        : {
+                                    'url': fedgerBaseUri + '/tagged/funding?tags=' + raw.value0.tags +
+                                      (extractMaybe(raw.value0.range_from) ? '&range_from=' + extractMaybe(raw.value0.range_from) : '') +
+                                      (extractMaybe(raw.value0.range_to) ? '&range_to=' + extractMaybe(raw.value0.range_to) : '') +
+                                      (extractMaybe(raw.value0.isJoin) ? '&isJoin=' + extractMaybe(raw.value0.isJoin) : '') +
+                                      (extractMaybe(raw.value0.cursor) ? '&cursor=' + extractMaybe(raw.value0.cursor) : '') +
+                                      '&apikey=' + raw.value0.apikey
+                                 }
   };
 
   q = mapQueries[api];

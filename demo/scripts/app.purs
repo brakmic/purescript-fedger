@@ -3,6 +3,7 @@ module DemoApp.Fedger where
 import Prelude                       (Unit, bind, (++), unit, return)
 import Control.Monad.Eff             (Eff)
 import Data.List                     (..)
+import Data.Maybe                    (..)
 import Control.Monad.Eff.Console     (CONSOLE(), log)
 import API.Fedger                    (..)
 import API.Fedger.Messages.Queries   (..)
@@ -96,18 +97,40 @@ logInvestors = \(InvestorsResponse r) -> do
 
 main ::  forall e. Eff (console :: CONSOLE, fedgerM :: FedgerM | e) Unit
 main = do
-      let myApiKey = "YOUR_API_KEY_HERE"
-      --let discoveryQuery = DiscoveryQuery { s : "oracle", crossDomain : true, apikey : myApiKey }
-      --let discoveryCompaniesQuery = DiscoveryCompaniesQuery { s : "oracle", crossDomain : true, apikey : myApiKey, cursor : 0 }
-      let discoveryVerticesQuery = DiscoveryVerticesQuery { s : "oracle", crossDomain : true, apikey : myApiKey, cursor : 0 }
-      let investorsQuery = InvestorsQuery { domain : "arangodb.com", crossDomain : true, apikey : myApiKey, cursor : 0 }
-      let fundingDetailsQuery = FundingDetailsQuery { domain : "arangodb.com", crossDomain : true, apikey : myApiKey }
-      --let logoQuery = LogoQuery { domain : "giantswarm.io", crossDomain : true, apikey : myApiKey }
-      --let snapshotQuery = CompanySnapshotQuery { domain : "giantswarm.io", crossDomain : true, apikey : myApiKey }
-      --getCompanySnapshot snapshotQuery companySnapshotCB
-     --getFundingDetails fundingDetailsQuery fundingDetailsCB
-      --getLogo logoQuery logoCB
-      --getInvestors investorsQuery logInvestors
-      --getDiscovery discoveryQuery logDiscovery
-      --getDiscoveryCompanies discoveryCompaniesQuery logDiscoveryCompanies
-      getDiscoveryVertices discoveryVerticesQuery logDiscoveryVertices
+      let myApiKey = "1289ec547f52487dc88cf967ba0eba42"
+      -- | ********************************** QUERY CONFIGS ***********************************************
+      -- let discoveryQuery = DiscoveryQuery { s : "oracle", crossDomain : true, apikey : myApiKey }
+      -- let discoveryCompaniesQuery = DiscoveryCompaniesQuery { s : "oracle", crossDomain : true, apikey : myApiKey, cursor : 0 }
+      -- let discoveryVerticesQuery = DiscoveryVerticesQuery { s : "oracle", crossDomain : true, apikey : myApiKey, cursor : 0 }
+      -- let investorsQuery = InvestorsQuery { domain : "arangodb.com", crossDomain : true, apikey : myApiKey, cursor : 0 }
+      -- let fundingDetailsQuery = FundingDetailsQuery { domain : "arangodb.com", crossDomain : true, apikey : myApiKey }
+      -- let logoQuery = LogoQuery { domain : "giantswarm.io", crossDomain : true, apikey : myApiKey }
+      -- let snapshotQuery = CompanySnapshotQuery { domain : "giantswarm.io", crossDomain : true, apikey : myApiKey }
+      -- let geoLocatedCompaniesQuery = GeoLocatedCompaniesQuery { country_code : "DE", cities : (Cons "Berlin" Nil),
+      --                                                           cursor : 0, apikey: myApiKey, crossDomain : true }
+      -- let geoLocatedFundingsQuery = GeoLocatedFundingsQuery { country_code : "DE", cities : (Cons "Berlin" Nil),
+      --                                                         range_from : 0, range_to : 0, --<<<--- unused!
+      --                                                         cursor : 0, apikey: myApiKey, crossDomain : true }
+      -- let latestFundingsQuery = LatestFundingsQuery { apikey: myApiKey, crossDomain : true }
+      -- let statsFundingsQuery = StatsFundingsQuery { year : 2015, month : Nothing, country : Nothing,
+      --                                               tag : Nothing, apikey: myApiKey, crossDomain : true }
+      {-let taggedCompaniesQuery = TaggedCompaniesQuery { tags : "oracle, microsoft", isJoin : Just true, cursor : Just 0,
+                                                         apikey: myApiKey, crossDomain : true }-}
+      let taggedFundingsQuery = TaggedFundingsQuery { tags : "oracle, microsoft", range_from : Nothing, range_to : Nothing,
+                                                         isJoin : Just true, cursor : Just 0,
+                                                         apikey: myApiKey, crossDomain : true }
+
+      -- | ********************************* QUERY COMMANDS ***********************************************
+      -- getCompanySnapshot snapshotQuery companySnapshotCB
+      -- getFundingDetails fundingDetailsQuery fundingDetailsCB
+      -- getLogo logoQuery logoCB
+      -- getInvestors investorsQuery logInvestors
+      -- getDiscovery discoveryQuery logDiscovery
+      -- getDiscoveryCompanies discoveryCompaniesQuery logDiscoveryCompanies
+      -- getDiscoveryVertices discoveryVerticesQuery logDiscoveryVertices
+      -- getGeoLocatedCompanies geoLocatedCompaniesQuery logAnyResponse
+      -- getGeoLocatedFundings geoLocatedFundingsQuery logAnyResponse
+      -- getLatestFundings latestFundingsQuery logAnyResponse
+      -- getStatsFundings statsFundingsQuery logAnyResponse
+      -- getTaggedCompanies taggedCompaniesQuery logAnyResponse
+      getTaggedFundings taggedFundingsQuery logAnyResponse
