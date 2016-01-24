@@ -1,7 +1,15 @@
 
 // module API.Fedger
 
-var jQuery = $ = require('jquery');
+var jQuery     = $ = require('jquery');
+
+//we need these imports to map weakly-typed JSONs into PureScript-Objects
+var Data_List  = require("Data.List");
+var _Queries   = require("API.Fedger.Messages.Queries");
+var _Responses = require("API.Fedger.Messages.Responses");
+var _Partials  = require("API.Fedger.Messages.Partials");
+
+var fedgerBaseUri = 'https://api.fedger.io/v1';
 
 //************************************  COMPANY API **************************/
 
@@ -77,7 +85,7 @@ var getGeoLocatedFundings = function(options){
 
 var getLatestFundings = function (options) {
   return callApi(options);
-}
+};
 
 /********************* STATS API *************************************/
 
@@ -144,7 +152,7 @@ var callApi = function(options){
   var opts = convertQueryFor(api, options);
   var json = queryService(opts);
   return json;
-}
+};
 
 //All Service-Queries go through this function.
 var queryService = function(options){
@@ -166,7 +174,7 @@ var queryService = function(options){
       return {};
     };
   };
-}
+};
 //Helper to construct the proper name of currently used API-call
 var getApiName = function(options){
   var apiName = null;
@@ -179,20 +187,156 @@ var getApiName = function(options){
   return apiName;
 };
 
-/*********************** CONVERTERS **********************************/
+/*********************** CONVERTERS + BOILERPLATE***************************/
 
-var fedgerBaseUri = 'https://api.fedger.io/v1';
+var toPSList = function(jsList){
+  var list = [];
+  if(jsList){
+    if(jsList[0] && jsList[1]){
+      list = Data_List.Cons.create(jsList[0])(jsList.splice(1));
+    }else{
+      list = Data_List.Cons.create(jsList[0])(Data_List.Nil.value);
+    }
+  }else{
+    list = Data_List.Cons.create(Data_List.Nil.value)(Data_List.Nil.value);
+  }
+  return list;
+};
+
+var createRound = function(rnd){
+  rnd.investors = createInvestors(rnd.investors);
+  var round = _Partials.Round.create(rnd);
+  return round;
+};
+
+var createRounds = function(rnds){
+  if(!rnds)return;
+  var rounds = [];
+  for (var i = rnds.length - 1; i >= 0; i--) {
+    rounds.push(createRound(rnds[i]));
+  }
+  return rounds;
+};
+
+var createInvestor = function(inv){
+  var investr = _Partials.Investor.create(inv);
+  return investr;
+};
+
+var createInvestors = function(invs){
+  if(!invs)return;
+  var invstrss = [];
+  for (var i = invs.length - 1; i >= 0; i--) {
+    invstrss.push(createInvestor(invs[i]));
+  }
+  return invstrss;
+};
+
+var createFundings = function(funds){
+  if(!funds)return;
+  var fndss = [];
+  for (var i = funds.length - 1; i >= 0; i--) {
+    fndss.push(funds[i]);
+  }
+  return fndss;
+};
+
+var createLocation = function(loc){
+  var loc_ = _Partials.Location.create(loc);
+  return loc_;
+};
+
+var createLocations = function(locs){
+  if(!locs)return;
+  var locss = [];
+  for (var i = locs.length - 1; i >= 0; i--) {
+    locss.push(createLocation(locs[i]));
+  }
+  return locss;
+};
+
+var createPeer = function(per){
+  var peer = _Partials.Peer.create(per);
+  return peer;
+};
+
+var createPeers = function(pers){
+  if(!pers)return;
+  var perss = [];
+  for (var i = pers.length - 1; i >= 0; i--) {
+    perss.push(createPeer(pers[i]));
+  }
+  return perss;
+};
+
+var createPortfolioEntry = function(por){
+  var port = _Partials.Portfolio.create(por);
+  return port;
+};
+
+
+var createPortfolio = function(pors){
+  if(!pors)return;
+  var porss = [];
+  for (var i = pors.length - 1; i >= 0; i--) {
+    porss.push(createPortfolioEntry(pors[i]));
+  }
+  return porss;
+};
+
+var createVertice = function(ver){
+  var vert = _Partials.Vertice.create(ver);
+  return vert;
+};
+
+var createVertices = function(vers){
+  if(!vers)return;
+  var verss = [];
+  for (var i = vers.length - 1; i >= 0; i--) {
+    verss.push(createVertice(vers[i]));
+  }
+  return verss;
+};
+
+var createEdge = function(edg){
+  var edge = _Partials.Edge.create(edg);
+  return edge;
+};
+
+var createEdges = function(edgs){
+  if(!edgs)return;
+  var edgss = [];
+  for (var i = edgs.length - 1; i >= 0; i--) {
+    edgss.push(createEdge(edgs[i]));
+  }
+  return edgss;
+};
+
+var createDiscoveryCompaniesEntry = function(dis){
+  var disce = _Partials.DiscoveryCompaniesEntry.create(dis);
+  return disce;
+};
+
+var createDiscoveryCompanies = function(discs){
+  if(!discs)return;
+  var discss = [];
+  for (var i = discs.length - 1; i >= 0; i--) {
+    discss.push(createDiscoveryCompaniesEntry(discs[i]));
+  }
+  return discss;
+};
 
 //Below are tables defined which help to select correct data structures
 //for further processing on the PureScript side.
 
 var convertResponseFor = function(api, raw){
   var mapResponses = {
+      //************** COMPANY API ************************
       'getFundingDetails'      : {
                                    'domain'       : raw.domain,
                                    'amount_total' : raw.amount_total,
                                    'currency'     : raw.currency,
-                                   'rounds'       : raw.rounds
+                                   'rounds'       : toPSList(createRounds(raw.rounds))
                                  },
       'getLogo'                : {
                                    'data' : raw
@@ -208,30 +352,31 @@ var convertResponseFor = function(api, raw){
                                    'total_fund' : raw.total_fund,
                                    'currency'   : raw.currency,
                                    'cursor'     : raw.cursor,
-                                   'fundings'   : raw.fundings
+                                   'fundings'   : toPSList(raw.fundings) //this list isn't based on Fundings-Type,
+                                                                        //it's just a list of strings
                                  },
       'getCompanyInsights'     : {
                                    'cursor' : raw.cursor,
-                                   'nodes'  : raw.nodes
+                                   'nodes'  : toPSList(raw.nodes) //just a string list
                                  },
       'getInvestors'           : {
                                    'domain'    : raw.domain,
                                    'cursor'    : raw.cursor,
-                                   'investors' : raw.investors
+                                   'investors' : toPSList(createInvestors(raw.investors))
                                  },
       'getLocations'           : {
                                    'domain'    : raw.domain,
                                    'cursor'    : raw.cursor,
-                                   'locations' : raw.locations
+                                   'locations' : toPSList(createLocations(raw.locations))
                                  },
       'getPeers'               : {
                                    'domain' : raw.domain,
-                                   'peers'  : raw.peers
+                                   'peers'  : toPSList(createPeers(raw.peers))
                                 },
       'getPortfolioCompanies' : {
                                   'domain'    : raw.domain,
                                   'cursor'    : raw.cursor,
-                                  'portfolio' : raw.portfolio
+                                  'portfolio' : toPSList(createPortfolio(raw.portfolio))
                                 },
       'getCompanySnapshot' : {
                                 'dateFounded'   : raw.dateFounded,
@@ -256,7 +401,31 @@ var convertResponseFor = function(api, raw){
                                  'urlLinkedIn'   : raw.urlLinkedIn,
                                  'urlAngellist'  : raw.Angellist,
                                  'urlCrunchbase' : raw.urlCrunchbase
-                              }
+                              },
+      //******************** DISCOVER API ***********************
+      'getDiscovery'        : {
+                                'data' : raw.data ?
+                                {
+                                  'vertices' : raw.data.vertices ? toPSList(createVertices(raw.data.vertices)) : toPSList([]),
+                                  'edges'    : raw.data.edges    ? toPSList(createEdges(raw.data.edges)) : toPSList([])
+
+                                } //if NULL construct an empty structure
+                                : { 'vertices' : toPSList([]), edges : toPSList([]) }
+                              },
+      'getDiscoveryCompanies' : {
+                                  "cursor"      : raw.cursor,
+                                  "total_count" : raw.total_count,
+                                  "data"        : raw.data ? toPSList(createDiscoveryCompanies(raw.data))
+                                   //if NULL construct an empty array
+                                  : toPSList([])
+                                },
+      'getDiscoveryVertices'  : {
+                                  "cursor"      : raw.cursor,
+                                  "total_count" : raw.total_count,
+                                  "data"        : raw.data ? toPSList(createVertices(raw.data))
+                                  //if NULL constructr an empty array
+                                  : toPSList([])
+                                }
   },
   result = { 'value0': mapResponses[api] };
 
@@ -274,6 +443,7 @@ var convertQueryFor = function(api, raw){
   }, q, query
 
   mapQueries = {
+    //*************************** COMPANY API *******************************
     'getFundingDetails'     : {
 
                                 'url': fedgerBaseUri + '/company/' +
@@ -337,6 +507,19 @@ var convertQueryFor = function(api, raw){
                                                  raw.value0.domain +
                                       '/team/details?apikey=' + raw.value0.apikey,
                                 'cursor' : raw.value0.cursor
+                              },
+    //************************* DISCOVER API ****************************
+    'getDiscovery'          : {
+                                'url': fedgerBaseUri + '/discover?s=' + raw.value0.s +
+                                      '&apikey=' + raw.value0.apikey,
+                              },
+    'getDiscoveryCompanies' : {
+                                'url': fedgerBaseUri + '/discover/companies?s=' + raw.value0.s +
+                                      '&apikey=' + raw.value0.apikey,
+                              },
+    'getDiscoveryVertices'  : {
+                                'url': fedgerBaseUri + '/discover/vertices?s=' + raw.value0.s +
+                                      '&apikey=' + raw.value0.apikey,
                               }
   };
 

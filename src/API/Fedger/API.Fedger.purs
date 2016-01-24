@@ -30,9 +30,9 @@ foreign import getCompanySnapshot     :: forall e. CompanySnapshotQuery    -> (C
 foreign import getTeamDetails         :: forall e. TeamDetailsQuery        -> (TeamDetailsResponse        -> Eff e Unit) -> FedgerEff Unit
 
 -- | Discover API
-foreign import getDiscovery           :: forall a e. a -> (String -> Eff e Unit) -> FedgerEff Unit
-foreign import getDiscoveryCompanies  :: forall a e. a -> (String -> Eff e Unit) -> FedgerEff Unit
-foreign import getDiscoveryVertices   :: forall a e. a -> (String -> Eff e Unit) -> FedgerEff Unit
+foreign import getDiscovery           :: forall e. DiscoveryQuery          -> (DiscoveryResponse          -> Eff e Unit) -> FedgerEff Unit
+foreign import getDiscoveryCompanies  :: forall e. DiscoveryCompaniesQuery -> (DiscoveryCompaniesResponse -> Eff e Unit) -> FedgerEff Unit
+foreign import getDiscoveryVertices   :: forall e. DiscoveryVerticesQuery  -> (DiscoveryVerticesResponse  -> Eff e Unit) -> FedgerEff Unit
 
 -- | Geo API
 foreign import getGeoLocatedCompanies :: forall a e. a -> (String -> Eff e Unit) -> FedgerEff Unit

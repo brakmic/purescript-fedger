@@ -4,6 +4,8 @@ import Prelude                      (bind)
 import Data.List                    (List)
 import API.Fedger.Messages.Partials (..)
 
+-- | ***************** COMPANY API **************************
+
 data FundingDetailsResponse = FundingDetailsResponse {
   "name"           :: String,
   "domain"         :: String,
@@ -82,4 +84,22 @@ data TeamDetailsResponse = TeamDetailsResponse {
 
 data LogoResponse = LogoResponse {
   binary :: String
+}
+
+-- | ************************* DISCOVER API ***********************
+
+data DiscoveryResponse = DiscoveryResponse {
+  "data" :: DiscoveryData
+}
+
+data DiscoveryCompaniesResponse = DiscoveryCompaniesResponse {
+  "cursor"      :: Int,
+  "total_count" :: Int,
+  "data"        :: List DiscoveryCompaniesEntry
+}
+
+data DiscoveryVerticesResponse = DiscoveryVerticesResponse {
+  "cursor"      :: Int,
+  "total_count" :: Int,
+  "data"        :: List Vertice
 }

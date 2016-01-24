@@ -1,5 +1,7 @@
 module API.Fedger.Messages.Queries where
 
+-- | ******************* COMPANY API *********************************
+
 data FundingDetailsQuery = FundingDetailsQuery {
   domain      :: String,
   apikey      :: String,
@@ -71,4 +73,26 @@ data LogoQuery = LogoQuery {
   domain      :: String,
   apikey      :: String,
   crossDomain :: Boolean
+}
+
+-- | ************************* DISCOVER API ************************
+
+data DiscoveryQuery = DiscoveryQuery {
+  s           :: String,
+  apikey      :: String,
+  crossDomain :: Boolean
+}
+
+data DiscoveryCompaniesQuery = DiscoveryCompaniesQuery {
+  s           :: String,
+  apikey      :: String,
+  crossDomain :: Boolean,
+  cursor      :: Int
+}
+
+data DiscoveryVerticesQuery = DiscoveryVerticesQuery {
+  s           :: String,
+  apikey      :: String,
+  crossDomain :: Boolean,
+  cursor      :: Int
 }

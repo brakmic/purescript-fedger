@@ -14,9 +14,9 @@ So, Fedger.io is really perfect for me....*Machine Learning* **and** *PureScript
 
 #### Current status
 
-Altough all of <a href="https://dev.fedger.io/docs" target="_blank">of the APIs</a> are available as `foreign imports` currently only the Company API can be used.
+Altough all of <a href="https://dev.fedger.io/docs" target="_blank">of the APIs</a> are available as `foreign imports` currently only the Company & Discover API can be used.
 
-<img src="http://fs5.directupload.net/images/160122/cox5bm84.png">
+<img src="http://fs5.directupload.net/images/160124/wjxpqiab.png">
 
 The implementation of other APIs is underway.
 
