@@ -1,17 +1,14 @@
 module DemoApp.Fedger where
 
-import Prelude                       (Unit, bind, (++), ($), unit, return)
+import Prelude                       (Unit, bind, (++), unit, return)
 import Control.Monad.Eff             (Eff)
 import Data.List                     (..)
-import Data.Maybe                    (..)
 import Control.Monad.Eff.Console     (CONSOLE(), log)
 import API.Fedger                    (..)
 import API.Fedger.Messages.Queries   (..)
 import API.Fedger.Messages.Responses (..)
 import API.Fedger.Messages.Partials  (..)
 import Optic.Lens.Simple             (Lens, (^.), lens)
-import Data.Foreign
-import Data.Foreign.Class
 
 -- | -----------------------  Lenses ----------------------------------
 
