@@ -3,6 +3,8 @@
 This is a small collection of bindings for accessing the publicly available <a href="https://fedger.io/" target="_blank">Fedger.io</a> APIs.
 Simply register with your E-Mail to obtain a free API-Key.
 
+To make the testing easier there's a small <a href="https://github.com/brakmic/purescript-fedger/blob/master/demo/scripts/app.purs">Demo App</a> available. Just open your Browser's console.
+
 #### What's the purpose of this library?
 
 Fedger collects and provides information about companies by using machine learning. And because I'd like to learn more about ML *in practice* (<a href="http://blog.brakmic.com/data-science-for-losers-part-4-machine-learning/">and also</a> have <a href="http://blog.brakmic.com/data-science-for-losers-part-6-azure-ml/">written</a> a <a href="http://blog.brakmic.com/data-science-for-losers-part-6-azure-ml/">few articles</a>
