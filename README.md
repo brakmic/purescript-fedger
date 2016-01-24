@@ -3,7 +3,7 @@
 This is a small collection of bindings for accessing the publicly available <a href="https://fedger.io/" target="_blank">Fedger.io</a> APIs.
 Simply register with your E-Mail to obtain a free API-Key.
 
-To make the testing easier there's a small <a href="https://github.com/brakmic/purescript-fedger/blob/master/demo/scripts/app.purs">Demo App</a> available. Just open your Browser's console.
+To make the testing easier there's a small <a href="https://github.com/brakmic/purescript-fedger/blob/master/demo/scripts/app.purs">Demo App</a> available.
 
 #### What's the purpose of this library?
 
@@ -126,7 +126,7 @@ gulp build-demo
 gulp clean && gulp && gulp build-demo
 ```
 
-#### Running
+#### Running the Demo App
 
 ```shell
 npm start
