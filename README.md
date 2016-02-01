@@ -117,7 +117,7 @@ gulp
 *Frontend*
 
 ```shell
-gulp make-demo [*initial build only*]
+gulp make-demo [initial build only]
 gulp build-demo
 ```
 
