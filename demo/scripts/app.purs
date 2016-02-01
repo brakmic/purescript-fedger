@@ -2,13 +2,13 @@ module DemoApp.Fedger where
 
 import Prelude                       (Unit, bind, (++), unit, return)
 import Control.Monad.Eff             (Eff)
-import Data.List                     (..)
-import Data.Maybe                    (..)
+import Data.List                     (List(Nil, Cons))
+import Data.Maybe                    (Maybe(Just, Nothing))
 import Control.Monad.Eff.Console     (CONSOLE(), log)
-import API.Fedger                    (..)
-import API.Fedger.Messages.Queries   (..)
-import API.Fedger.Messages.Responses (..)
-import API.Fedger.Messages.Partials  (..)
+import API.Fedger
+import API.Fedger.Messages.Queries
+import API.Fedger.Messages.Responses
+import API.Fedger.Messages.Partials
 import Optic.Lens.Simple             (Lens, (^.), lens)
 
 -- | -----------------------  Lenses ----------------------------------
@@ -103,7 +103,7 @@ main = do
       -- let discoveryCompaniesQuery = DiscoveryCompaniesQuery { s : "oracle", crossDomain : true, apikey : myApiKey, cursor : 0 }
       -- let discoveryVerticesQuery = DiscoveryVerticesQuery { s : "oracle", crossDomain : true, apikey : myApiKey, cursor : 0 }
       -- let investorsQuery = InvestorsQuery { domain : "arangodb.com", crossDomain : true, apikey : myApiKey, cursor : 0 }
-      -- let fundingDetailsQuery = FundingDetailsQuery { domain : "arangodb.com", crossDomain : true, apikey : myApiKey }
+      let fundingDetailsQuery = FundingDetailsQuery { domain : "giantswarm", crossDomain : true, apikey : myApiKey }
       -- let logoQuery = LogoQuery { domain : "giantswarm.io", crossDomain : true, apikey : myApiKey }
       -- let snapshotQuery = CompanySnapshotQuery { domain : "giantswarm.io", crossDomain : true, apikey : myApiKey }
       -- let geoLocatedCompaniesQuery = GeoLocatedCompaniesQuery { country_code : "DE", cities : (Cons "Berlin" Nil),
@@ -122,7 +122,7 @@ main = do
 
       -- | ********************************* QUERY COMMANDS ***********************************************
       -- getCompanySnapshot snapshotQuery companySnapshotCB
-      -- getFundingDetails fundingDetailsQuery fundingDetailsCB
+      getFundingDetails fundingDetailsQuery fundingDetailsCB
       -- getLogo logoQuery logoCB
       -- getInvestors investorsQuery logInvestors
       -- getDiscovery discoveryQuery logDiscovery
