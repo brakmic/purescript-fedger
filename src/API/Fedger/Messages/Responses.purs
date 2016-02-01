@@ -2,7 +2,7 @@ module API.Fedger.Messages.Responses where
 
 import Prelude                      (bind)
 import Data.List                    (List)
-import API.Fedger.Messages.Partials (..)
+import API.Fedger.Messages.Partials
 
 -- | ***************** COMPANY API **************************
 

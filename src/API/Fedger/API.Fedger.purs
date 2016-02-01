@@ -3,8 +3,8 @@ module API.Fedger where
 import Prelude                       (Unit, bind)
 import Control.Monad.Eff             (Eff)
 import Control.Monad.Eff.Console     (CONSOLE())
-import API.Fedger.Messages.Queries   (..)
-import API.Fedger.Messages.Responses (..)
+import API.Fedger.Messages.Queries
+import API.Fedger.Messages.Responses
 
 -- | Fedger Effects & Types
 foreign import data FedgerM     :: !

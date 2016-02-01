@@ -1,6 +1,6 @@
 module API.Fedger.Messages.Queries where
 
-import Data.Maybe (..)
+import Data.Maybe
 import Data.List  (List)
 
 -- | ******************* COMPANY API *********************************
