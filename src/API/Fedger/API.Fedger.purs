@@ -1,4 +1,32 @@
-module API.Fedger where
+module API.Fedger
+                (
+                    Fedger
+                  , FedgerM
+                  , FedgerEff
+                  , CompanyLogo
+                  , logRaw
+                  , getFundingDetails
+                  , getFundingStatus
+                  , getFundings
+                  , getCompanyInsight
+                  , getInvestors
+                  , getLocations
+                  , getLogo
+                  , getPeers
+                  , getPortfolioCompanies
+                  , getCompanySnapshot
+                  , getTeamDetails
+                  , getDiscovery
+                  , getDiscoveryCompanies
+                  , getDiscoveryVertices
+                  , getGeoLocatedCompanies
+                  , getGeoLocatedFundings
+                  , getLatestFundings
+                  , getStatsFundings
+                  , getTaggedCompanies
+                  , getTaggedFundings
+                )
+                where
 
 import Prelude                       (Unit, bind)
 import Control.Monad.Eff             (Eff)
