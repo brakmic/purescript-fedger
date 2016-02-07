@@ -2,8 +2,11 @@
 /node_modules/
 /.pulp-cache/
 /output/
-/.psci*
+.psci*
 /test/
 /dist/
 /demo/scripts/release/
 /src/.webpack.js
+pursuit.json
+.gitignore
+.*
