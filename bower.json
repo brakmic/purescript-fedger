@@ -1,6 +1,10 @@
 {
   "name": "purescript-fedger",
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/brakmic/purescript-fedger.git"
+  },
   "moduleType": [
     "node"
   ],
@@ -11,6 +15,13 @@
     "output"
   ],
   "dependencies": {
-    "purescript-console": "^0.1.0"
+    "purescript-console": "^0.1.0",
+    "purescript-json": "^0.5.0",
+    "purescript-aff": "^0.14.0",
+    "purescript-lens": "^0.9.1",
+    "purescript-simple-request": "^2.0.5",
+    "purescript-affjax": "^0.10.2",
+    "purescript-node-http": "^0.2.0",
+    "purescript-prelude": "^0.1.4"
   }
 }
