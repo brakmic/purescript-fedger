@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "purescript-console": "latest",
-    "purescript-json": "latest",
     "purescript-aff": "latest",
     "purescript-lens": "latest",
     "purescript-simple-request": "latest",
