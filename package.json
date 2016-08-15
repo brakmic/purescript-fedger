@@ -1,6 +1,6 @@
 {
   "name": "purescript-fedger",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Fedger-API bindings for PureScript",
   "main": "index.js",
   "directories": {
