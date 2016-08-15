@@ -8,7 +8,7 @@ module API.Fedger
                   , getFundingDetails
                   , getFundingStatus
                   , getFundings
-                  , getCompanyInsight
+                  , getCompanyInsights
                   , getInvestors
                   , getLocations
                   , getLogo
@@ -28,11 +28,49 @@ module API.Fedger
                 )
                 where
 
-import Prelude                       (Unit, bind)
+import Prelude                       (Unit)
 import Control.Monad.Eff             (Eff)
 import Control.Monad.Eff.Console     (CONSOLE())
-import API.Fedger.Messages.Queries
-import API.Fedger.Messages.Responses
+import API.Fedger.Messages.Queries   (TaggedFundingsQuery, 
+                                      TaggedCompaniesQuery, 
+                                      StatsFundingsQuery, 
+                                      LatestFundingsQuery, 
+                                      GeoLocatedFundingsQuery, 
+                                      GeoLocatedCompaniesQuery, 
+                                      DiscoveryVerticesQuery, 
+                                      DiscoveryCompaniesQuery, 
+                                      DiscoveryQuery, 
+                                      TeamDetailsQuery, 
+                                      CompanySnapshotQuery, 
+                                      PortfolioCompaniesQuery, 
+                                      PeersQuery, 
+                                      LogoQuery, 
+                                      LocationsQuery, 
+                                      InvestorsQuery, 
+                                      CompanyInsightsQuery, 
+                                      FundingsQuery, 
+                                      FundingStatusQuery, 
+                                      FundingDetailsQuery)
+import API.Fedger.Messages.Responses  (TaggedFundingsResponse, 
+                                      TaggedCompaniesResponse, 
+                                      StatsFundingsResponse, 
+                                      LatestFundingsResponse, 
+                                      GeoLocatedFundingsResponse, 
+                                      GeoLocatedCompaniesResponse, 
+                                      DiscoveryVerticesResponse, 
+                                      DiscoveryCompaniesResponse, 
+                                      DiscoveryResponse, 
+                                      TeamDetailsResponse, 
+                                      CompanySnapshotResponse, 
+                                      PortfolioCompaniesResponse, 
+                                      PeersResponse, 
+                                      LogoResponse, 
+                                      LocationsResponse, 
+                                      InvestorsResponse, 
+                                      CompanyInsightsResponse, 
+                                      FundingsResponse, 
+                                      FundingStatusResponse, 
+                                      FundingDetailsResponse)
 
 -- | Fedger Effects & Types
 foreign import data FedgerM     :: !
@@ -48,7 +86,7 @@ foreign import logRaw :: forall a e. a -> Eff (console :: CONSOLE | e) Unit
 foreign import getFundingDetails      :: forall e. FundingDetailsQuery      -> (FundingDetailsResponse      -> Eff e Unit) -> FedgerEff Unit
 foreign import getFundingStatus       :: forall e. FundingStatusQuery       -> (FundingStatusResponse       -> Eff e Unit) -> FedgerEff Unit
 foreign import getFundings            :: forall e. FundingsQuery            -> (FundingsResponse            -> Eff e Unit) -> FedgerEff Unit
-foreign import getCompanyInsight      :: forall e. CompanyInsightsQuery     -> (CompanyInsightsResponse     -> Eff e Unit) -> FedgerEff Unit
+foreign import getCompanyInsights     :: forall e. CompanyInsightsQuery     -> (CompanyInsightsResponse     -> Eff e Unit) -> FedgerEff Unit
 foreign import getInvestors           :: forall e. InvestorsQuery           -> (InvestorsResponse           -> Eff e Unit) -> FedgerEff Unit
 foreign import getLocations           :: forall e. LocationsQuery           -> (LocationsResponse           -> Eff e Unit) -> FedgerEff Unit
 foreign import getLogo                :: forall e. LogoQuery                -> (LogoResponse                -> Eff e Unit) -> FedgerEff Unit
